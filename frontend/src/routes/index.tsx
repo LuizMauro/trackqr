@@ -1,38 +1,32 @@
-import { Navigate, useRoutes } from "react-router-dom";
-import { DashboardLayout } from "@/layouts/dashboard";
-import { PublicLayout } from "@/layouts/public";
-import { Dashboard } from "@/pages/dashboard";
-import { Login } from "@/pages/login";
 import { useAuth } from "@/hooks/use-auth";
-import { CreateQrCodePage } from "@/pages/create-qrcode";
 
-export function Router() {
-  const { isAuthenticated } = useAuth();
+import PrivateRoutes from "./PrivateRoute";
+import PublicRoutes from "./PublicRoute";
 
-  const routes = useRoutes([
-    {
-      path: "/",
-      element: isAuthenticated ? <DashboardLayout /> : <Navigate to="/login" />,
-      children: [
-        { element: <Navigate to="/dashboard" />, index: true },
-        { path: "dashboard", element: <Dashboard /> },
-      ],
-    },
-    {
-      path: "/",
-      element: !isAuthenticated ? (
-        <PublicLayout />
-      ) : (
-        <Navigate to="/dashboard" />
-      ),
-      children: [{ path: "login", element: <Login /> }],
-    },
-    {
-      path: "/create-qrcode",
-      element: isAuthenticated ? <DashboardLayout /> : <Navigate to="/login" />,
-      children: [{ path: "/create-qrcode", element: <CreateQrCodePage /> }],
-    },
-  ]);
+import { LayoutDashboard } from "@/layouts/dashboard";
+import { useEffect } from "react";
 
-  return routes;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const PrivateRouteWithLayout = (Route: any) => {
+  return (
+    <LayoutDashboard>
+      <Route />
+    </LayoutDashboard>
+  );
+};
+
+function Routers() {
+  const { user } = useAuth();
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
+  if (user) {
+    return PrivateRouteWithLayout(PrivateRoutes);
+  } else {
+    return <PublicRoutes />;
+  }
 }
+
+export default Routers;

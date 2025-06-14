@@ -1,14 +1,18 @@
-import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from '@/components/theme-provider';
-import { Toaster } from '@/components/ui/sonner';
-import { Router } from '@/routes';
+import { ThemeProvider } from "./hooks/theme-provider";
+import { AuthProvider } from "./hooks/use-auth";
+import { BrowserRouter } from "react-router-dom";
+
+import Routes from "./routes";
+import { Toaster } from "./components/ui/toaster";
 
 function App() {
   return (
     <BrowserRouter>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <Router />
-        <Toaster />
+      <ThemeProvider>
+        <AuthProvider>
+          <Routes />
+          <Toaster />
+        </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
   );
