@@ -1,5 +1,5 @@
 import { ChevronRight, type LucideIcon } from "lucide-react";
-
+import { NavLink } from "react-router-dom";
 import {
   Collapsible,
   CollapsibleContent,
@@ -54,9 +54,13 @@ export function NavMain({
                   {item.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
-                          <span>{subItem.title}</span>
-                        </a>
+                        <NavLink to={subItem.url}>
+                          {({ isActive }) => (
+                            <span className={isActive ? "active" : ""}>
+                              {subItem.title}
+                            </span>
+                          )}
+                        </NavLink>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   ))}

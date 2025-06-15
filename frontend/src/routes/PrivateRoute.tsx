@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import { Dashboard } from "@/pages/dashboard";
 import { CreateQrCodePage } from "@/pages/create-qrcode";
+import { ListQrCodePage } from "@/pages/list-qrcode";
 
 interface IRoute {
   path: string;
@@ -13,6 +14,10 @@ const routes: IRoute[] = [
   {
     path: "/dashboard",
     component: <Dashboard />,
+  },
+  {
+    path: "/list-qrcode",
+    component: <ListQrCodePage />,
   },
   {
     path: "/create-qrcode",

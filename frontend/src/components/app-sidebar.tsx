@@ -52,6 +52,10 @@ const data = {
       isActive: true,
       items: [
         {
+          title: "Lista",
+          url: "/list-qrcode",
+        },
+        {
           title: "Criar",
           url: "/create-qrcode",
         },
