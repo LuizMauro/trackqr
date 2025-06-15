@@ -5,6 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { MailModule } from './mail/mail.module';
+import { QrModule } from './qr/qr.module';
+import { QrTrackingModule } from './qrTracking/qr-tracking.module';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { MailModule } from './mail/mail.module';
     UserModule,
     AuthModule,
     MailModule,
+    QrModule,
+    QrTrackingModule,
   ],
   providers: [],
 })
